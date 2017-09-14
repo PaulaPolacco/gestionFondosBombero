@@ -1,0 +1,143 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Administración de Proveedores{% endblock title %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-6 col-md-4">
+                <h3 >
+                    Proveedores
+                </h3>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-8">
+                    {% if app.session.flashBag.has('success') %}
+                    <div class="alert alert-success">
+                        {% for msg in app.session.flashBag.get('success') %}
+                            {{ msg }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <hr>
+        <div id="toolbar">
+            <select class="form-control">
+                <option value="">Exportar</option>
+                <option value="all">Exportar Todo</option>
+            </select>
+        </div>
+        
+        <button  data-toggle="modal" data-target="#myModal" class="btn btn-success pull-right margin-top margin-right" data-toggle="tooltip" title="Nuevo socio"><span class="glyphicon glyphicon-plus"></span></button>
+        <table id="table"
+                data-toggle="table"
+                data-toolbar="#toolbar"
+                data-show-export="true"
+                data-search="true" 
+                data-strict-search="true"
+                data-query-params="queryParams"
+                data-pagination="true"
+                data-height="700"
+                data-export-types="['excel', 'pdf']"
+                data-export-options='{
+                    "fileName": "Proveedores", 
+                    "worksheetName": "Proveedores",         
+                    "jspdf": {                  
+                    "autotable": {
+                        "styles": { "rowHeight": 20, "fontSize": 10 },
+                        "headerStyles": { "fillColor": 255, "textColor": 0 },
+                        "alternateRowStyles": { "fillColor": [60, 69, 79], "textColor": 255 }
+                    }
+                    }
+                }'>
+            <thead>
+                <tr>
+                    <th data-field="nro_proveedor">Nro. Prov.</th>       
+                    <th data-field="razon_social">Razón Social</th>
+                    <th data-field="CUIL">CUIL</th>
+                    <th data-field="localidad">Localidad</th>
+                    <th data-field="domicilio">Domicilio</th>
+                    <th data-field="fax">Fax</th>
+                    <th data-field="banco">Banco</th>
+                    <th data-field="nro_cuenta">Nro. Cuenta</th>
+                    <th data-field="nro_CBU">CBU</th>
+                    <th data-field="email">Email</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2189</td>
+                    <td>Perren S.A</td>
+                    <td>20675421120</td>
+                    <td>Rawson</td>
+                    <td>Calle 123</td>
+                    <td>20675421120</td>
+                    <td>Galicia</td>
+                    <td>016000000239984</td>
+                    <td>014409500002934</td>
+                    <td>perren@info.com</td>
+                    <td>
+                        <button class="btn btn-default btn-sm" data-toggle="tooltip" title="Ver"><span class="glyphicon glyphicon-eye-open"></span></button>
+                        <button class="btn btn-warning btn-sm" data-toggle="tooltip" title="Modificar datos"><span class="glyphicon glyphicon-pencil"></span></button>
+                        <button class="btn btn-danger btn-sm" data-toggle="tooltip" title="Dar de baja"><span class="glyphicon glyphicon-remove"></span></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2189</td>
+                    <td>Perren S.A</td>
+                    <td>20675421120</td>
+                    <td>Rawson</td>
+                    <td>Calle 123</td>
+                    <td>20675421120</td>
+                    <td>Galicia</td>
+                    <td>016000000239984</td>
+                    <td>014409500002934</td>
+                    <td>perren@info.com</td>
+                    <td>
+                        <button class="btn btn-default btn-sm" data-toggle="tooltip" title="Ver"><span class="glyphicon glyphicon-eye-open"></span></button>
+                        <button class="btn btn-warning btn-sm" data-toggle="tooltip" title="Modificar datos"><span class="glyphicon glyphicon-pencil"></span></button>
+                        <button class="btn btn-danger btn-sm" data-toggle="tooltip" title="Dar de baja"><span class="glyphicon glyphicon-remove"></span></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>    
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="myModalLabel">Nuevo proveedor</h4>
+            </div>
+            <div class="modal-body">
+              
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+        
+    {% block javascripts %}
+        {{parent()}}
+        
+        
+        <script>
+            $("#myModal").on("show.bs.modal", function(e) {
+                console.log("abrio modal");
+                $.ajax({
+                    type: 'GET',
+                    url:'/proveedores/nuevo',
+                    success: function (data) {
+                        $(".modal-body").load("/proveedores/nuevo");
+                    },
+                    error: function ()
+                    {  
+                        alert('Error ajax');
+                    }
+            });
+            });
+        </script>
+    {% endblock javascripts %}
+    
+{% endblock body %}

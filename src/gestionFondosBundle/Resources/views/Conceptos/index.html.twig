@@ -1,0 +1,113 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Administración de conceptos{% endblock title %}
+
+{% block body %}
+    <div class="container">
+        <h3 >
+            Conceptos
+            <hr>
+        </h3>
+
+        <div id="toolbar">
+            <select class="form-control">
+                <option value="">Exportar</option>
+                <option value="all">Exportar Todo</option>
+            </select>
+        </div>
+        
+        <button  data-toggle="modal" data-target="#myModal" class="btn btn-success pull-right margin-top margin-right" data-toggle="tooltip" title="Nuevo socio"><span class="glyphicon glyphicon-plus"></span></button>
+        <table id="table"
+                data-toggle="table"
+                data-toolbar="#toolbar"
+                data-show-export="true"
+                data-search="true" 
+                data-strict-search="true"
+                data-query-params="queryParams"
+                data-pagination="true"
+                data-height="700"
+                data-export-types="['excel', 'pdf']"
+                data-export-options='{
+                    "fileName": "Conceptos", 
+                    "worksheetName": "Conceptos",         
+                    "jspdf": {                  
+                    "autotable": {
+                        "styles": { "rowHeight": 20, "fontSize": 10 },
+                        "headerStyles": { "fillColor": 255, "textColor": 0 },
+                        "alternateRowStyles": { "fillColor": [60, 69, 79], "textColor": 255 }
+                    }
+                    }
+                }'>
+            <thead>
+                <tr>
+                    <th data-field="nro_proveedor">Código</th>       
+                    <th data-field="razon_social">Descripción</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>BCAN</td>
+                    <td>Brigada Canina</td>
+                    <td>
+                        <button class="btn btn-warning" data-toggle="tooltip" title="Modificar datos"><span class="glyphicon glyphicon-pencil"></span></button>
+                        <button class="btn btn-danger" data-toggle="tooltip" title="Dar de baja"><span class="glyphicon glyphicon-remove"></span></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>BCH</td>
+                    <td>BANCO CHUBUT</td>
+                    <td>
+                        <button class="btn btn-warning" data-toggle="tooltip" title="Modificar datos"><span class="glyphicon glyphicon-pencil"></span></button>
+                        <button class="btn btn-danger" data-toggle="tooltip" title="Dar de baja"><span class="glyphicon glyphicon-remove"></span></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>F710</td>
+                    <td>OFICIO JUDICIAL</td>
+                    <td>
+                        <button class="btn btn-warning" data-toggle="tooltip" title="Modificar datos"><span class="glyphicon glyphicon-pencil"></span></button>
+                        <button class="btn btn-danger" data-toggle="tooltip" title="Dar de baja"><span class="glyphicon glyphicon-remove"></span></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>    
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="myModalLabel">Nuevo concepto</h4>
+            </div>
+            <div class="modal-body">
+              
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+        
+    {% block javascripts %}
+        {{parent()}}
+        
+        
+        <script>
+            $("#myModal").on("show.bs.modal", function(e) {
+                console.log("abrio modal");
+                $.ajax({
+                    type: 'GET',
+                    url:'/conceptos/nuevo',
+                    success: function (data) {
+                        $(".modal-body").load("/conceptos/nuevo");
+                    },
+                    error: function ()
+                    {  
+                        alert('Error ajax');
+                    }
+            });
+            });
+        </script>
+    {% endblock javascripts %}
+    
+{% endblock body %}
