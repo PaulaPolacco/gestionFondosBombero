@@ -1,0 +1,122 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Crear nueva caja{% endblock title %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-6 col-md-4">
+                <h3 >
+                    Nueva caja
+                </h3>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-8">
+                {% if app.session.flashBag.has('success') %}
+                    <div class="alert alert-success">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        {% for msg in app.session.flashBag.get('success') %}
+                            {{ msg }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                {% if app.session.flashBag.has('danger') %}
+                    <div class="alert alert-danger">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        {% for msg in app.session.flashBag.get('danger') %}
+                            {{ msg }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+              
+        <hr>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <label class="checkbox-inline">
+                    <input type="radio" id="inlineCheckbox1" name="esBanco" checked> No es banco
+                </label>
+                <label class="checkbox-inline">
+                    <input type="radio" id="inlineCheckbox2" name="esBanco"> Es banco
+                </label>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div id="form-no-es-banco">
+            {{ form_start(form,{'attr': {'class': 'form-horizontal'}} ) }}
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Nombre</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.nombre) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Descripción</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.descripcion) }}
+                    </div>
+                </div>
+                {{form_widget(form.Guardar)}}
+            {{ form_end(form) }}
+        </div>
+
+        <div id="form-banco" style="display: none;">    
+            {{ form_start(formBanco,{'action': path('nueva_caja_banco'), 'attr': {'class': 'form-horizontal'}} ) }}
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Nombre</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(formBanco.nombre) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Descripción</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(formBanco.descripcion) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Banco</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(formBanco.banco) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Número de cuenta</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(formBanco.nroCuenta) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">CBU</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(formBanco.cbu) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Alias</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(formBanco.alias) }}
+                    </div>
+                </div>
+            {{ form_end(formBanco) }}
+        </div>
+    </div>
+
+    {% block javascripts %}
+    {{parent()}}
+    <script type="text/javascript">
+        $(document).ready(function(){
+          $("#inlineCheckbox1").click(function(){
+            $("#form-banco").hide();
+            $("#form-no-es-banco").show();
+          });
+          $("#inlineCheckbox2").click(function(){
+            $("#form-banco").show();
+            $("#form-no-es-banco").hide();
+          });
+        });
+        </script>
+    {% endblock javascripts %}
+{% endblock body %}

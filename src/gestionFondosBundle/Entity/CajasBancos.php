@@ -1,6 +1,8 @@
 <?php
 
 namespace gestionFondosBundle\Entity;
+use Doctrine\Common\Collections\ArrayCollection;
+use gestionFondosBundle\Entity\Cajas;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -10,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="cajas_bancos")
  * @ORM\Entity(repositoryClass="gestionFondosBundle\Repository\CajasBancosRepository")
  */
-class CajasBancos
+class CajasBancos extends Cajas
 {
     /**
      * @var int
