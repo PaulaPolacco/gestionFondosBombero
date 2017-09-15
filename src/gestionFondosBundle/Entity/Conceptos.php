@@ -39,7 +39,7 @@ class Conceptos
     /**
      * @var string
      *
-     * @ORM\Column(name="estado", type="string", length=1, options={"default":"a"})
+     * @ORM\Column(name="estado", type="string", length=1, options={"default":"A"})
      */
     private $estado;
 
