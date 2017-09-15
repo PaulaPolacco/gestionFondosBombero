@@ -15,4 +15,12 @@ class ConceptosController extends Controller
         return $this->render('gestionFondosBundle:Conceptos:index.html.twig');
     }
 
+    /**
+     * @Route("/conceptos/nuevo", name="conceptos_nuevo")
+     */
+    public function nuevoConcepto()
+    {
+        return $this->render('gestionFondosBundle:Conceptos:index.html.twig');
+    }
+
 }
