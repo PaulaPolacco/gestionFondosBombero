@@ -2,6 +2,8 @@
 
 namespace gestionFondosBundle\Repository;
 
+use gestionFondosBundle\Entity\Cajas;
+
 /**
  * CajasRepository
  *
@@ -10,4 +12,23 @@ namespace gestionFondosBundle\Repository;
  */
 class CajasRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function find($id)
+    {
+        return $this->getDoctrine()->getEntityManager()
+            ->createQuery(
+                "SELECT * FROM cajas WHERE id='$id'"
+            )
+            ->getResult();
+    }
+
+    public function updateCaja($caja)
+    {
+        $id = $caja->getId();
+        $descripcion = $caja->getDescripcion();
+        return $this->getEntityManager()
+            ->createQuery(
+                "UPDATE gestionFondosBundle:Cajas as caja SET caja.descripcion='$descripcion' WHERE caja.id='$id'"
+            )
+            ->getResult();
+    }
 }

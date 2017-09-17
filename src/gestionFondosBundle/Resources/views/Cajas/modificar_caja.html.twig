@@ -1,0 +1,54 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Modificar datos de caja{% endblock title %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-6 col-md-4">
+                <h3 >
+                    Modificar caja
+                </h3>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-8">
+                {% if app.session.flashBag.has('success') %}
+                    <div class="alert alert-success">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        {% for msg in app.session.flashBag.get('success') %}
+                            {{ msg }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                {% if app.session.flashBag.has('danger') %}
+                    <div class="alert alert-danger">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        {% for msg in app.session.flashBag.get('danger') %}
+                            {{ msg }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+              
+        <hr>
+
+        <div id="form-no-es-banco">
+            {{ form_start(form,{'attr': {'class': 'form-horizontal'}} ) }}
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Nombre</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.nombre,{'attr':{'disabled':'disabled'}}) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Descripción</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.descripcion) }}
+                    </div>
+                </div>
+                {{form_widget(form.Guardar)}}
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+{% endblock body %}

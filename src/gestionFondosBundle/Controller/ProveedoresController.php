@@ -19,11 +19,10 @@ class ProveedoresController extends Controller
     }
 
     /**
-     * @Route("/proveedores/nuevo", name="nuevo_proveedor")
+     * @Route("/proveedor/nuevo", name="nuevo_proveedor")
      */
     public function nuevoProveedor(Request $request)
-    {
-        
+    {   
         if ($request->isMethod('POST')){
             $nuevo_proveedor = new Proveedores();
 

@@ -10,4 +10,27 @@ namespace gestionFondosBundle\Repository;
  */
 class PersonasRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function find($id)
+    {
+        return $this->getDoctrine()->getEntityManager()
+            ->createQuery(
+                "SELECT * FROM personas WHERE id='$id'"
+            )
+            ->getResult();
+    }
+
+    public function updatePersona($persona)
+    {
+        $id = $persona->getId();
+        $email = $persona->getEmail();
+        $telefono = $persona->getTelefono();
+        $domicilio = $persona->getDomicilio();
+        $localidad = $persona->getLocalidad();
+
+        return $this->getEntityManager()
+            ->createQuery(
+                "UPDATE gestionFondosBundle:Personas as per SET per.email='$email', per.telefono='$telefono', per.domicilio='$domicilio', per.localidad='$localidad' WHERE per.id='$id'"
+            )
+            ->getResult();
+    }
 }

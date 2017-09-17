@@ -10,8 +10,8 @@ use gestionFondosBundle\Entity\Cajas;
 use gestionFondosBundle\Entity\CajasBancos;
 use gestionFondosBundle\Form\CajasType;
 use gestionFondosBundle\Form\CajasBancosType;
-use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 
 class CajasController extends Controller
 {
@@ -142,5 +142,36 @@ class CajasController extends Controller
 
         return $this->redirectToRoute('nueva_caja');
     }
+
+    /**
+     * @Route("/caja/modificar/{id}", name="caja_modificar")
+     */
+     public function modificarCaja(Request $request, $id)
+     {
+        //obtiene la caja a modificar
+        $repo = $this->getDoctrine()->getRepository(Cajas::class);
+        $caja = $repo->findOneById($id);
+
+        $form = $this->createForm(CajasType::class, $caja);
+
+        if($request->isMethod('POST')){
+            $form->handleRequest($request);
+
+            if($form->isValid()){
+                try{
+                    $repo->updateCaja($caja);
+                }catch(\Exeption $e){
+                    $request->getSession()
+                    ->getFlashBag()
+                    ->add('danger', 'Error al modificar la caja');
+                    return $this->render('gestionFondosBundle:Cajas:modificar_caja.html.twig',
+                    array('form' => $form->createView()));
+                }
+            }
+        }
+         return $this->render('gestionFondosBundle:Cajas:modificar_caja.html.twig',array(
+            'form' => $form->createView()
+         ));
+     }
 
 }
