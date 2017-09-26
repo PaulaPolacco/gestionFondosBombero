@@ -10,6 +10,10 @@ namespace gestionFondosBundle\Repository;
  */
 class PersonasRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findAll(){
+        return $this->getDoctrine()->getEntityManager()->createQuery("SELECT nombres FROM personas")->getResult();
+    }
+
     public function find($id)
     {
         return $this->getDoctrine()->getEntityManager()

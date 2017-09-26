@@ -1,67 +1,122 @@
-<div>
-    <form method="POST" action="{{ path('nuevo_proveedor') }}">
-        <div class="form-group">
-            <div class="row">
-                <div class="col-sm-6">
-                    <label for="exampleInputPassword1">Razón social</label>
-                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Razón social" >
-                </div>
-                <div class="col-sm-6">
-                    <label for="exampleInputPassword1">Nro. proveedor</label>
-                    <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Número de proveedor" >
-                </div>
+{% extends "base.html.twig" %}
+
+{% block title %}Crear nuevo proveedor{% endblock title %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-6 col-md-4">
+                <h3 >
+                    Modificar proveedor
+                </h3>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-8">
+                {% if app.session.flashBag.has('success') %}
+                    <div class="alert alert-success">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        {% for msg in app.session.flashBag.get('success') %}
+                            {{ msg }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                {% if app.session.flashBag.has('danger') %}
+                    <div class="alert alert-danger">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        {% for msg in app.session.flashBag.get('danger') %}
+                            {{ msg }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
         </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1">CUIL</label>
-            <input type="number" class="form-control" id="exampleInputPassword1" placeholder="CUIL">
-        </div>
+              
+        <hr>
         
-        <div class="form-group">
-            <div class="row">
-                <div class="col-sm-6">
-                    <label for="exampleInputPassword1">Localidad</label>
-                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Localidad">
+        <div id="form-no-es-banco">
+            {{ form_start(form,{'attr': {'class': 'form-horizontal'}} ) }}
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Persona</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.persona) }}
+                    </div>
                 </div>
-                <div class="col-sm-6">
-                    <label for="exampleInputPassword1">Domicilio</label>
-                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Domicilio">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Razón Social</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.razonSocial) }}
+                    </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="exampleInputPassword1">Fax</label>
-            <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Fax">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1">Banco</label>
-            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Banco">
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-sm-6">
-                    <label for="exampleInputPassword1">Nro. CUenta</label>
-                    <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Número de cuenta">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">CUIT</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.cuit) }}
+                    </div>
                 </div>
-                <div class="col-sm-6">
-                    <label for="exampleInputPassword1">CBU</label>
-                    <input type="number" class="form-control" id="exampleInputPassword1" placeholder="CBU">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Email Corporativo</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.emailCorporativo) }}
+                    </div>
                 </div>
-            </div>
-        </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Domicilio</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.domicilio) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Localidad</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.localidad) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Télefono - FAX</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.telefonoFax) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Banco</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.banco) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Nro. Cuenta</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.nroCuenta) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">CBU</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.cbu) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Datos Cheque</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.datosCheque) }}
+                    </div>
+                </div>
 
-        <div class="form-group">
-            <label for="exampleInputPassword1">Email</label>
-            <input type="email" class="form-control" id="exampleInputPassword1" placeholder="Email" >
+                {{form_widget(form.Guardar)}}
+            {{ form_end(form) }}
         </div>
+    </div>
 
-        <div class="checkbox">
-            <label>
-            <input type="checkbox" checked="checked"> Activo?
-            </label>
-        </div>
-        <button type="submit" class="btn btn-success center-block">Guardar</button>
-    </form>
-</div>
+    {% block javascripts %}
+    <script type="text/javascript">
+        $('#gestionfondosbundle_proveedores_persona').on('change',function(){ 
+            $('#gestionfondosbundle_proveedores_razonSocial').prop('disabled',true)
+            $('#gestionfondosbundle_proveedores_cuit').prop('disabled',true)
+            $('#gestionfondosbundle_proveedores_emailCorporativo').prop('disabled',true)
+            $('#gestionfondosbundle_proveedores_domicilio').prop('disabled',true)
+            $('#gestionfondosbundle_proveedores_localidad').prop('disabled',true)
+        });
+    </script>
 
+    {% endblock javascripts %}
+
+{% endblock body %}

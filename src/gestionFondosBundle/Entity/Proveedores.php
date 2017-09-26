@@ -33,7 +33,7 @@ class Proveedores
     /**
      * @var string
      *
-     * @ORM\Column(name="cuit", type="string", length=255, unique=true)
+     * @ORM\Column(name="cuit", type="string", length=255)
      */
     private $cuit;
 
