@@ -67,4 +67,35 @@ class ConceptosController extends Controller
         return $this->render('gestionFondosBundle:Conceptos:nuevo_concepto.html.twig',array('form' => $form->CreateView()));
     }
 
+    /**
+    * @Route("/concepto/modificar/{id}", name="concepto_modificar")
+    */
+    public function modificarConcepto(Request $request, $id)
+    {
+        //obtiene la caja a modificar
+        $repo = $this->getDoctrine()->getRepository(Conceptos::class);
+        $concepto = $repo->findOneById($id);
+
+        $form = $this->createForm(ConceptosType::class, $concepto);
+
+        if($request->isMethod('POST')){
+            $form->handleRequest($request);
+
+            if($form->isValid()){
+                try{
+                    $repo->updateCaja($concepto);
+                }catch(\Exeption $e){
+                    $request->getSession()
+                    ->getFlashBag()
+                    ->add('danger', 'Error al modificar el concepto');
+                    return $this->render('gestionFondosBundle:Conceptos:modificar_concepto.html.twig',
+                    array('form' => $form->createView()));
+                }
+            }
+        }
+        return $this->render('gestionFondosBundle:Conceptos:modificar_concepto.html.twig',array(
+            'form' => $form->createView()
+        ));
+    }
+
 }
