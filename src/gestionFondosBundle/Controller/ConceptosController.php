@@ -16,7 +16,9 @@ class ConceptosController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('gestionFondosBundle:Conceptos:index.html.twig');
+        $repo=$this->getDoctrine()->getRepository(Conceptos::class);
+        $conceptos = $repo->findAll();
+        return $this->render('gestionFondosBundle:Conceptos:index.html.twig',array('conceptos'=>$conceptos));
     }
 
     /**
@@ -42,7 +44,7 @@ class ConceptosController extends Controller
         		}catch(UniqueConstraintViolationException $e){
                     $request->getSession()
                     ->getFlashBag()
-                    ->add('danger', 'Ya existe un concepto con ese códio');
+                    ->add('danger', 'Ya existe un concepto con ese código');
                     return $this->render('gestionFondosBundle:Conceptos:nuevo_concepto.html.twig',
                     array('form' => $form->createView()));
                 }
@@ -58,7 +60,7 @@ class ConceptosController extends Controller
                     ->add('danger', 'El concepto no pudo ser creado!');
                 }
                 //return $this->render('gestionFondosBundle:Proveedores:index.html.twig');
-                return $this->redirectToRoute('concepto_nuevo');
+                return $this->redirectToRoute('conceptos');
         	}
 
         }
