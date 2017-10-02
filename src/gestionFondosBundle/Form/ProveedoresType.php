@@ -29,6 +29,7 @@ class ProveedoresType extends AbstractType
                 'class' => 'gestionFondosBundle:Personas',
                 'required' => false,
                 'choice_label' => 'apellido',
+                'multiple' => false,
                 'mapped' => false,
                 'attr'=> array(
                     'class'=>'form-control',
