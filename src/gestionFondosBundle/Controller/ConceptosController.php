@@ -83,7 +83,7 @@ class ConceptosController extends Controller
 
             if($form->isValid()){
                 try{
-                    $repo->updateCaja($concepto);
+                    $repo->updateConcepto($concepto);
                 }catch(\Exeption $e){
                     $request->getSession()
                     ->getFlashBag()
@@ -91,6 +91,11 @@ class ConceptosController extends Controller
                     return $this->render('gestionFondosBundle:Conceptos:modificar_concepto.html.twig',
                     array('form' => $form->createView()));
                 }
+                 $request->getSession()
+                    ->getFlashBag()
+                    ->add('success', 'Concepto modificado correctamente');
+                return $this->redirectToRoute('conceptos');
+
             }
         }
         return $this->render('gestionFondosBundle:Conceptos:modificar_concepto.html.twig',array(

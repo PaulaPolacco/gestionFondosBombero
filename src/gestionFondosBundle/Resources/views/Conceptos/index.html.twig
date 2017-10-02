@@ -65,7 +65,7 @@
                         <td>{{cpto.codigo}}</td>
                         <td>{{cpto.descripcion}}</td>
                         <td>
-                            <button class="btn btn-warning" data-toggle="tooltip" title="Modificar datos"><span class="glyphicon glyphicon-pencil"></span></button>
+                            <a href={{path('concepto_modificar',{'id':cpto.id} )}} class="btn btn-warning" data-toggle="tooltip" title="Modificar datos"><span class="glyphicon glyphicon-pencil"></span></a>
                             <button class="btn btn-danger" data-toggle="tooltip" title="Dar de baja"><span class="glyphicon glyphicon-remove"></span></button>
                         </td>
                     </tr>

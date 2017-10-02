@@ -11,6 +11,17 @@ namespace gestionFondosBundle\Repository;
 class ConceptosRepository extends \Doctrine\ORM\EntityRepository
 {
 	public function findAll(){
-        return $this->getEntityManager()->createQuery("SELECT c.codigo, c.descripcion, c.estado FROM gestionFondosBundle:conceptos as c")->getResult();
+        return $this->getEntityManager()->createQuery("SELECT c.id, c.codigo, c.descripcion, c.estado FROM gestionFondosBundle:conceptos as c")->getResult();
+    }
+
+    public function updateConcepto($concepto)
+    {
+        $id = $concepto->getId();
+        $descripcion = $concepto->getDescripcion();
+        return $this->getEntityManager()
+            ->createQuery(
+                "UPDATE gestionFondosBundle:Conceptos as concepto SET concepto.descripcion='$descripcion' WHERE concepto.id='$id'"
+            )
+            ->getResult();
     }
 }

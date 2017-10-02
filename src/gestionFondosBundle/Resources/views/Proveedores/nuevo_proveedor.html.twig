@@ -109,11 +109,19 @@
     {% block javascripts %}
     <script type="text/javascript">
         $('#gestionfondosbundle_proveedores_persona').on('change',function(){ 
-            $('#gestionfondosbundle_proveedores_razonSocial').prop('disabled',true)
-            $('#gestionfondosbundle_proveedores_cuit').prop('disabled',true)
-            $('#gestionfondosbundle_proveedores_emailCorporativo').prop('disabled',true)
-            $('#gestionfondosbundle_proveedores_domicilio').prop('disabled',true)
-            $('#gestionfondosbundle_proveedores_localidad').prop('disabled',true)
+            if ($('#gestionfondosbundle_proveedores_persona').val() != ""){
+                $('#gestionfondosbundle_proveedores_razonSocial').prop('disabled',true)
+                $('#gestionfondosbundle_proveedores_cuit').prop('disabled',true)
+                $('#gestionfondosbundle_proveedores_emailCorporativo').prop('disabled',true)
+                $('#gestionfondosbundle_proveedores_domicilio').prop('disabled',true)
+                $('#gestionfondosbundle_proveedores_localidad').prop('disabled',true)
+            }else{
+                $('#gestionfondosbundle_proveedores_razonSocial').prop('disabled',false)
+                $('#gestionfondosbundle_proveedores_cuit').prop('disabled',false)
+                $('#gestionfondosbundle_proveedores_emailCorporativo').prop('disabled',false)
+                $('#gestionfondosbundle_proveedores_domicilio').prop('disabled',false)
+                $('#gestionfondosbundle_proveedores_localidad').prop('disabled',false)
+            }
         });
     </script>
 

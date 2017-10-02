@@ -25,18 +25,18 @@ class ProveedoresType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-          /*  ->add('persona', EntityType::class, array(
+            ->add('persona', EntityType::class, array(
                 'class' => 'gestionFondosBundle:Personas',
                 'required' => false,
                 'choice_label' => 'apellido',
-                'multiple' => TRUE,
+                'multiple' => false,
                 'mapped' => false,
                 'attr'=> array(
                     'class'=>'form-control',
                 )
-            ))*/
+            ))
 
-            ->add('persona',  EntityType::class, array(
+            /*->add('persona',  EntityType::class, array(
                    'class' => 'gestionFondosBundle:Personas',
                    'query_builder' => function(EntityRepository $em) {
                         $sql="SELECT id FROM gestionFondosBundle:Personas as p WHERE p.apellido = :apellido ORDER BY p.apellido ASC";
@@ -44,18 +44,18 @@ class ProveedoresType extends AbstractType
                         $query = $em->getDoctrine()->getEntityManager()->createQuery($sql)->setParameter('apellido', 'Polacco'); 
                         return $query->getResult();
                                  
-                              /*  $qb = $em->createQueryBuilder('u');
+                                $qb = $em->createQueryBuilder('u');
                                 $qb->add('where', $qb->expr()->like('u.apellido', ':apellido'));
                                 $qb->orderBy('u.apellido', 'ASC');
                                 $qb->setParameter('apellido', 'Polacco');
-                                return $qb->getId();*/
+                                return $qb->getId();
 
                        },
                    'attr'=> array(
                         'property'=>'apellidosnombres',
                         'label'=>'Docente Aprueba Historia Clinica: '
                         )
-                  ))
+                  ))*/
             ->add('razonSocial', TextType::class, array(
                 'attr'=> array(
                     'class'=>'form-control'
