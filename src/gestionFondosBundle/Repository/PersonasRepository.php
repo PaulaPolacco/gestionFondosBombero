@@ -10,8 +10,13 @@ namespace gestionFondosBundle\Repository;
  */
 class PersonasRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function personasProveedores(){
+        $sql='SELECT p.id FROM gestionFondosBundle:Personas as p WHERE p.apellido = :apellido ORDER BY p.apellido ASC';
+        return $this->getEntityManager()->createQuery($sql)->setParameter('apellido', 'apellido')->getResult(); 
+    }
+
     public function findAll(){
-        return $this->getDoctrine()->getEntityManager()->createQuery("SELECT nombres FROM personas")->getResult();
+        return $this->getEntityManager()->createQuery("SELECT p.nombres FROM gestionFondosBundle:Personas as p")->getResult();
     }
 
     public function find($id)

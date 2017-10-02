@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Comprobantes
  *
  * @ORM\Table(name="Comprobantes")
- * @ORM\Entity(repositoryClass="gestionFondosBundle\Repository\comprobantesRepository")
+ * @ORM\Entity(repositoryClass="gestionFondosBundle\Repository\ComprobantesRepository")
  */
 class Comprobantes
 {
@@ -39,7 +39,7 @@ class Comprobantes
     /**
      * @var string
      *
-     * @ORM\Column(name="estado", type="string", length=1, unique=true)
+     * @ORM\Column(name="estado", type="string", length=1)
      */
     private $estado;
 
