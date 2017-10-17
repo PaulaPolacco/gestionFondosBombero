@@ -8,8 +8,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use gestionFondosBundle\Entity\Cajas;
 use gestionFondosBundle\Entity\CajasBancos;
+use gestionFondosBundle\Entity\CajasDetalle;
 use gestionFondosBundle\Form\CajasType;
 use gestionFondosBundle\Form\CajasBancosType;
+use gestionFondosBundle\Form\CajasDetalleType;
 
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 
@@ -173,5 +175,20 @@ class CajasController extends Controller
             'form' => $form->createView()
          ));
      }
+
+
+         /**
+     * @Route("/caja/detalle", name="caja_detalle")
+    */
+    public function cajaDetalle(Request $request)
+    {   
+        //crea los formularios para las cajas y las cajas de bancos
+        $caja_detalle = new CajasDetalle();
+        $form = $this->createForm(CajasDetalleType::class, $caja_detalle);
+
+       
+        return $this->render('gestionFondosBundle:Cajas:caja_detalle.html.twig',
+                            array('form' => $form->createView()));
+    }
 
 }
