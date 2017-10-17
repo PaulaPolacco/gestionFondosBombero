@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-xs-6 col-md-4">
                 <h3 >
-                    Modificar proveedor
+                    Nuevo proveedor
                 </h3>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-8">
@@ -38,6 +38,7 @@
                     <label class="col-sm-2 control-label">Persona</label>
                     <div class="col-sm-10">
                         {{ form_widget(form.persona) }}
+                        <input type="text" id="hd-inp-persona" class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
@@ -53,7 +54,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Email Corporativo</label>
+                    <label class="col-sm-2 control-label">Email</label>
                     <div class="col-sm-10">
                         {{ form_widget(form.emailCorporativo) }}
                     </div>
@@ -71,7 +72,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Télefono - FAX</label>
+                    <label class="col-sm-2 control-label">Telefono / Fax</label>
                     <div class="col-sm-10">
                         {{ form_widget(form.telefonoFax) }}
                     </div>
@@ -100,16 +101,16 @@
                         {{ form_widget(form.datosCheque) }}
                     </div>
                 </div>
-
-                {{form_widget(form.Guardar)}}
             {{ form_end(form) }}
         </div>
     </div>
 
     {% block javascripts %}
+
     <script type="text/javascript">
-        $('#gestionfondosbundle_proveedores_persona').on('change',function(){ 
-            if ($('#gestionfondosbundle_proveedores_persona').val() != ""){
+        $('#hd-inp-persona').on('change',function(){ 
+            console.log("sad");
+            if ($('#hd-inp-persona').val() != ""){
                 $('#gestionfondosbundle_proveedores_razonSocial').prop('disabled',true)
                 $('#gestionfondosbundle_proveedores_cuit').prop('disabled',true)
                 $('#gestionfondosbundle_proveedores_emailCorporativo').prop('disabled',true)
@@ -125,6 +126,27 @@
         });
     </script>
 
+    <script>
+        
+        var personas = new Array();
+        var ids = new Array();
+        
+        {% for persona in personas %}
+            personas.push('{{persona.nombres}}'+' '+'{{persona.apellido}}');
+            ids.push('{{persona.id}}');
+        {% endfor %}
+        
+        $( function() {
+            $( "#hd-inp-persona" ).autocomplete({
+                source: personas
+            });
+        } );
+
+        $('#hd-inp-persona').on('change',function(){ 
+            indice = personas.indexOf($('#hd-inp-persona').val());
+            $('#gestionfondosbundle_proveedores_persona').val(ids[indice]);
+        });
+    </script>
     {% endblock javascripts %}
 
 {% endblock body %}

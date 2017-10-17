@@ -94,7 +94,7 @@ class Proveedores
     private $datosCheque;
 
     /**
-     *
+     * @ORM\OneToOne(targetEntity="Personas")
      * @ORM\JoinColumn(name="persona", referencedColumnName="id", nullable=true)
      */
     private $persona;

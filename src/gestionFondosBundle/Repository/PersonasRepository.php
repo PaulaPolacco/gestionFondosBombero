@@ -16,7 +16,7 @@ class PersonasRepository extends \Doctrine\ORM\EntityRepository
     }
 
     public function findAll(){
-        return $this->getEntityManager()->createQuery("SELECT p.nombres FROM gestionFondosBundle:Personas as p")->getResult();
+        return $this->getEntityManager()->createQuery("SELECT p.id, p.nombres, p.apellido FROM gestionFondosBundle:Personas as p")->getResult();
     }
 
     public function find($id)
