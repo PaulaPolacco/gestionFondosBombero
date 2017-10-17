@@ -54,7 +54,7 @@
                 <tr>
                     <th data-field="nro_proveedor">Nro. Prov.</th>       
                     <th data-field="razon_social">Razón Social</th>
-                    <th data-field="CUIL">CUIL</th>
+                    <th data-field="CUIL">CUIL/CUIT</th>
                     <th data-field="localidad">Localidad</th>
                     <th data-field="domicilio">Domicilio</th>
                     <th data-field="fax">Fax</th>
@@ -66,42 +66,32 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>2189</td>
-                    <td>Perren S.A</td>
-                    <td>20675421120</td>
-                    <td>Rawson</td>
-                    <td>Calle 123</td>
-                    <td>20675421120</td>
-                    <td>Galicia</td>
-                    <td>016000000239984</td>
-                    <td>014409500002934</td>
-                    <td>perren@info.com</td>
-                    <td>
-                        <button class="btn btn-default btn-sm" data-toggle="tooltip" title="Ver"><span class="glyphicon glyphicon-eye-open"></span></button>
-                        <button class="btn btn-warning btn-sm" data-toggle="tooltip" title="Modificar datos"><span class="glyphicon glyphicon-pencil"></span></button>
-                        <button class="btn btn-danger btn-sm" data-toggle="tooltip" title="Dar de baja"><span class="glyphicon glyphicon-remove"></span></button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2189</td>
-                    <td>Perren S.A</td>
-                    <td>20675421120</td>
-                    <td>Rawson</td>
-                    <td>Calle 123</td>
-                    <td>20675421120</td>
-                    <td>Galicia</td>
-                    <td>016000000239984</td>
-                    <td>014409500002934</td>
-                    <td>perren@info.com</td>
-                    <td>
-                        <button class="btn btn-default btn-sm" data-toggle="tooltip" title="Ver"><span class="glyphicon glyphicon-eye-open"></span></button>
-                        <button class="btn btn-warning btn-sm" data-toggle="tooltip" title="Modificar datos"><span class="glyphicon glyphicon-pencil"></span></button>
-                        <button class="btn btn-danger btn-sm" data-toggle="tooltip" title="Dar de baja"><span class="glyphicon glyphicon-remove"></span></button>
-                    </td>
-                </tr>
+                {% for proveedor in proveedores %}
+                    <tr>
+                        <td>{{proveedor.id}}</td>
+                        <td>{{proveedor.razonSocial}}</td>
+                        {% if proveedor.cuit == "" %}
+                            <td>{{proveedor.persona.cuil}}</td>
+                        {% else %}
+                            <td>{{proveedor.cuit}}</td>
+                        {% endif %}
+                        
+                        <td>{{proveedor.localidad}}</td>
+                        <td>{{proveedor.domicilio}}</td>
+                        <td>{{proveedor.telefonoFax}}</td>
+                        <td>{{proveedor.banco}}</td>
+                        <td>{{proveedor.nroCuenta}}</td>
+                        <td>{{proveedor.cbu}}</td>
+                        <td>{{proveedor.emailCorporativo}}</td>
+                        <td>
+                            <button class="btn btn-default btn-sm" data-toggle="tooltip" title="Ver"><span class="glyphicon glyphicon-eye-open"></span></button>
+                            <button class="btn btn-warning btn-sm" data-toggle="tooltip" title="Modificar datos"><span class="glyphicon glyphicon-pencil"></span></button>
+                            <button class="btn btn-danger btn-sm" data-toggle="tooltip" title="Dar de baja"><span class="glyphicon glyphicon-remove"></span></button>
+                        </td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>    
-    
+    {{dump(proveedores)}}
 {% endblock body %}

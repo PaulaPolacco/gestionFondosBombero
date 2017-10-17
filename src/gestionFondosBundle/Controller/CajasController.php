@@ -42,7 +42,7 @@ class CajasController extends Controller
     }
 
     /**
-     * @Route("/caja/nueva", name="nueva_caja")
+     * @Route("caja/nueva", name="nueva_caja")
     */
     public function nuevaCaja(Request $request)
     {   

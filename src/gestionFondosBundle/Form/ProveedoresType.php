@@ -11,51 +11,28 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use gestionFondosBundle\Form\PersonasType;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use gestionFondosBundle\Repository\PersonasRepository;
 use Doctrine\ORM\EntityRepository;
+
+use gestionFondosBundle\Form\DataTransformer\PersonaToStringTransformer;
+use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\Form\CallbackTransformer;
+
 class ProveedoresType extends AbstractType 
 {
+
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('persona', EntityType::class, array(
-                'class' => 'gestionFondosBundle:Personas',
-                'required' => false,
-                'choice_label' => 'apellido',
-                'multiple' => false,
-                'mapped' => false,
-                'attr'=> array(
-                    'class'=>'form-control',
-                )
+            ->add('persona', HiddenType::class, array(
             ))
-
-            /*->add('persona',  EntityType::class, array(
-                   'class' => 'gestionFondosBundle:Personas',
-                   'query_builder' => function(EntityRepository $em) {
-                        $sql="SELECT id FROM gestionFondosBundle:Personas as p WHERE p.apellido = :apellido ORDER BY p.apellido ASC";
-                        //$em = getDoctrine()->getEntityManager();
-                        $query = $em->getDoctrine()->getEntityManager()->createQuery($sql)->setParameter('apellido', 'Polacco'); 
-                        return $query->getResult();
-                                 
-                                $qb = $em->createQueryBuilder('u');
-                                $qb->add('where', $qb->expr()->like('u.apellido', ':apellido'));
-                                $qb->orderBy('u.apellido', 'ASC');
-                                $qb->setParameter('apellido', 'Polacco');
-                                return $qb->getId();
-
-                       },
-                   'attr'=> array(
-                        'property'=>'apellidosnombres',
-                        'label'=>'Docente Aprueba Historia Clinica: '
-                        )
-                  ))*/
             ->add('razonSocial', TextType::class, array(
                 'attr'=> array(
                     'class'=>'form-control'

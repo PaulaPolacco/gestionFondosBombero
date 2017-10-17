@@ -1,9 +1,14 @@
-
 gestion_fondos:
     resource: "@gestionFondosBundle/Controller/"
     type:     annotation
     prefix:   /
 
+login_check:
+    path: /login_check
+
+logout:
+    path: /login
+    
 app:
     resource: '@AppBundle/Controller/'
     type: annotation

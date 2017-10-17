@@ -8,6 +8,7 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" href="{{ asset('public/css/bootstrap-table.css') }}">
+        <link rel="stylesheet" href="{{ asset('public/css/jquery-ui.css') }}">
         <link rel="stylesheet" href="{{ asset('public/css/styles.css') }}">
     </head>
     <body>
@@ -39,9 +40,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Gestión de socios<b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Adm. socios</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Adm. cobradores</a></li>
+                            <li><a href="{{ url('nueva_persona') }}">Alta de personas</a></li>
                         </ul>
                     </li>
                     <li><a href="{{ url('proveedores') }}">Proveedores</a></li>
@@ -49,7 +48,7 @@
                 
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usuario <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{app.user}}<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Cerrar sesión</a></li>
                     </ul>
@@ -64,11 +63,11 @@
         integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
         crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-        <script src="public/js/bootstrap-table.js"></script>
-        <script src="public/js/table-export.js"></script>
-        <script src="public/js/bootstrap-table-export.js"></script>
+        <script src="{{ asset('/public/js/bootstrap-table.js') }}"></script>
+        <script src="{{ asset('/public/js/table-export.js') }}"></script>
+        <script src="{{ asset('/public/js/bootstrap-table-export.js') }}"></script>
+        <script src="{{ asset('/public/js/jquery-ui.js') }}"></script>
 
-        
         
         {% block javascripts %}  
         {% endblock %}
