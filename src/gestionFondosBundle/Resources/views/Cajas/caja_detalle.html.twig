@@ -98,8 +98,9 @@
                         <td>{{ form_widget(form.tipoComprobante) }}</td>
                         <td>{{ form_widget(form.nroComprobante) }}</td>                   
                         <td>{{ form_widget(form.fondoOrigen) }}</td>
-                        <td>{{ form_widget(form.socio) }}
-                            
+                        <td>
+                            {{ form_widget(form.socio) }}
+                            <input type="text" id="hd-inp-socio" class="form-control">
                         </td>
                         <td>{{ form_widget(form.proveedor) }}</td>
                         <td>{{ form_widget(form.descripcion) }}</td>
@@ -134,6 +135,25 @@
         });
     </script>
 
+    <script>
+        var socios = new Array();
+        var ids_socios = new Array();
+        
+        {% for socio in socios %}
+            socios.push('{{socio.persona.nombres}}'+' '+'{{socio.persona.apellido}}');
+            ids_socios.push('{{socio.id}}');
+        {% endfor %}
+
+        $("#hd-inp-socio").autocomplete({
+            source: socios,
+            change: function(){
+                indice = socios.indexOf($('#hd-inp-socio').val());
+                $('#gestionfondosbundle_cajasdetalle_socio').val(ids_socios[indice]);
+            }})
+        .focus(function(){            
+                $(this).autocomplete('search', $(this).val())
+        });
+    </script>
   
     {% endblock javascripts %}
 

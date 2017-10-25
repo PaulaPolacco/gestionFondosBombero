@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use gestionFondosBundle\Form\ConceptosType;
 use gestionFondosBundle\Form\ComprobantesType;
 use gestionFondosBundle\Form\ProveedoresType;
@@ -43,10 +44,8 @@ class CajasDetalleType extends AbstractType
                 'attr'=> array(
                     'class'=>'form-control'
                 )))
-        ->add('socio', TextType::class, array(
-                'attr'=> array(
-                    'class'=>'form-control'
-                )))
+        ->add('socio', HiddenType::class, array(
+            ))
         ->add('descripcion', TextType::class, array(
                 'attr'=> array(
                     'class'=>'form-control'

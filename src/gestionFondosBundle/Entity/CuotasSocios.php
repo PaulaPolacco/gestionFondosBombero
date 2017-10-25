@@ -28,7 +28,7 @@ class CuotasSocios
     private $idSocioEnCampania;
 
     /**
-     * @ORM\OneToOne(targetEntity="cobradores")
+     * @ORM\OneToOne(targetEntity="Cobradores")
      * @ORM\JoinColumn(name="idCobrador", referencedColumnName="id", nullable=true)
      */
     private $idCobrador;

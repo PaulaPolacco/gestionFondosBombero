@@ -189,13 +189,13 @@ class CajasController extends Controller
      //   $proveedores = $repo=$this->getDoctrine()->getRepository(Proveedores::class)->findAll();
      //   $conceptos = $repo=$this->getDoctrine()->getRepository(Conceptos::class)->findAll();
      //   $comprobantes = $repo=$this->getDoctrine()->getRepository(Comprobantes::class)->findAll();
-        $socios = $repo=$this->getDoctrine()->getRepository(Socios::class)->findAll();
+        
         //crea los formularios para las cajas y las cajas de bancos
         $caja_detalle = new CajasDetalle();
         $form = $this->createForm(CajasDetalleType::class, $caja_detalle);
 
-        $repo=$this->getDoctrine()->getRepository(CajasDetalle::class);
-        $detalles = $repo->findAll();
+        $detalles= $this->getDoctrine()->getRepository(CajasDetalle::class)->findAll();
+        $socios = $this->getDoctrine()->getRepository(Socios::class)->findAll();
        
         return $this->render('gestionFondosBundle:Cajas:caja_detalle.html.twig', array(
             'form' => $form->createView(),

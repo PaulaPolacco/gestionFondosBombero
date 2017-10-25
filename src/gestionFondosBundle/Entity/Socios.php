@@ -22,10 +22,10 @@ class Socios
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="Personas", inversedBy="proveedor")
-     * @ORM\JoinColumn(name="idPersona", referencedColumnName="id", nullable=true)
+     * @ORM\OneToOne(targetEntity="Personas")
+     * @ORM\JoinColumn(name="persona", referencedColumnName="id", nullable=true)
      */
-    private $idPersona;
+    private $persona;
 
     /**
      * @var \DateTime
@@ -69,27 +69,27 @@ class Socios
     }
 
     /**
-     * Set idPersona
+     * Set persona
      *
-     * @param integer $idPersona
+     * @param integer $persona
      *
      * @return Socios
      */
-    public function setIdPersona($idPersona)
+    public function setPersona($persona)
     {
-        $this->idPersona = $idPersona;
+        $this->persona = $persona;
 
         return $this;
     }
 
     /**
-     * Get idPersona
+     * Get persona
      *
      * @return int
      */
-    public function getIdPersona()
+    public function getPersona()
     {
-        return $this->idPersona;
+        return $this->persona;
     }
 
     /**
