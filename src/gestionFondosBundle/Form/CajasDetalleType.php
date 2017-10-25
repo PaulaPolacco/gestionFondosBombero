@@ -67,10 +67,10 @@ class CajasDetalleType extends AbstractType
                 'attr'=> array(
                     'class'=>'form-control'
                 )))
-        ->add('idCaja', IntegerType::class, array(
+        /**->add('idCaja', IntegerType::class, array(
                 'attr'=> array(
                     'class'=>'form-control'
-                )))
+                )))**/
         ->add('tipoComprobante', TextType::class, array(
                 'attr'=> array(
                     'class'=>'form-control'

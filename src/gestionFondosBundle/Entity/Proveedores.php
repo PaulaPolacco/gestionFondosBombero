@@ -100,6 +100,7 @@ class Proveedores
     private $persona;
 
     /**
+    * @ORM\OneToOne(targetEntity="CajasDetalle")
     * @ORM\OneToMany(targetEntity="CajasDetalle", mappedBy="proveedor")
     */
     private $detallesCajas;

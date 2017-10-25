@@ -9,6 +9,10 @@ use Symfony\Component\HttpFoundation\Request;
 use gestionFondosBundle\Entity\Cajas;
 use gestionFondosBundle\Entity\CajasBancos;
 use gestionFondosBundle\Entity\CajasDetalle;
+use gestionFondosBundle\Entity\Proveedores;
+use gestionFondosBundle\Entity\Comprobantes;
+use gestionFondosBundle\Entity\Conceptos;
+use gestionFondosBundle\Entity\Socios;
 use gestionFondosBundle\Form\CajasType;
 use gestionFondosBundle\Form\CajasBancosType;
 use gestionFondosBundle\Form\CajasDetalleType;
@@ -182,13 +186,26 @@ class CajasController extends Controller
     */
     public function cajaDetalle(Request $request)
     {   
+     //   $proveedores = $repo=$this->getDoctrine()->getRepository(Proveedores::class)->findAll();
+     //   $conceptos = $repo=$this->getDoctrine()->getRepository(Conceptos::class)->findAll();
+     //   $comprobantes = $repo=$this->getDoctrine()->getRepository(Comprobantes::class)->findAll();
+        $socios = $repo=$this->getDoctrine()->getRepository(Socios::class)->findAll();
         //crea los formularios para las cajas y las cajas de bancos
         $caja_detalle = new CajasDetalle();
         $form = $this->createForm(CajasDetalleType::class, $caja_detalle);
 
+        $repo=$this->getDoctrine()->getRepository(CajasDetalle::class);
+        $detalles = $repo->findAll();
        
-        return $this->render('gestionFondosBundle:Cajas:caja_detalle.html.twig',
-                            array('form' => $form->createView()));
+        return $this->render('gestionFondosBundle:Cajas:caja_detalle.html.twig', array(
+            'form' => $form->createView(),
+            'detalles'=>$detalles,
+            'socios'=>$socios,
+       //     'proveedores'=>$proveedores,
+       //     'conceptos'=>$conceptos,
+       //     'comprobantes'=>$comprobantes
+            )
+        );
     }
 
 }

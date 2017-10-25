@@ -3,7 +3,6 @@
 {% block title %}Caja diaria{% endblock title %}
 
 {% block body %}
-    <div class="container">
         <div class="row">
             <div class="col-xs-6 col-md-4">
                 <h3 >
@@ -29,81 +28,100 @@
                 {% endif %}
             </div>
         </div>
-              
-        <hr>
-        
-        <div id="form-no-es-banco">
-            {{ form_start(form,{'attr': {'class': 'form-horizontal'}} ) }}
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Fecha</label>
-                    <div class="col-sm-10">
-                        {{ form_widget(form.fecha) }}
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Tipo Ingreso</label>
-                    <div class="col-sm-10">
-                        {{ form_widget(form.tipoIngreso) }}
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Tipo Comp.</label>
-                    <div class="col-sm-10">
-                        {{ form_widget(form.tipoComprobante) }}
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Nro Comp.</label>
-                    <div class="col-sm-10">
-                        {{ form_widget(form.nroComprobante) }}
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Socio</label>
-                    <div class="col-sm-10">
-                        {{ form_widget(form.socio) }}
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Descripcion</label>
-                    <div class="col-sm-10">
-                        {{ form_widget(form.descripcion) }}
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Proveedor</label>
-                    <div class="col-sm-10">
-                        {{ form_widget(form.proveedor) }}
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Concepto</label>
-                    <div class="col-sm-10">
-                        {{ form_widget(form.codigoConcepto) }}
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Debe</label>
-                    <div class="col-sm-10">
-                        {{ form_widget(form.debe) }}
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Haber</label>
-                    <div class="col-sm-10">
-                        {{ form_widget(form.haber) }}
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Fondo Origen</label>
-                    <div class="col-sm-10">
-                        {{ form_widget(form.fondoOrigen) }}
-                    </div>
-                </div>
 
-               {{ form_end(form) }}
+        <hr>
+    
+        <div id="toolbar">
+            <select class="form-control">
+                <option value="">Exportar</option>
+                <option value="all">Exportar Todo</option>
+            </select>
         </div>
-    </div>
+
+        <table id="table"
+                data-toggle="table"
+                data-toolbar="#toolbar"
+                data-show-export="true"
+                data-search="true" 
+                data-strict-search="true"
+                data-query-params="queryParams"
+                data-pagination="true"
+                data-export-types="['excel']"
+                data-export-options='{
+                    "fileName": "DetalleCaja", 
+                    "worksheetName": "DetalleCaja",         
+                    "jspdf": {                  
+                    "autotable": {
+                        "styles": { "rowHeight": 20, "fontSize": 10 },
+                        "headerStyles": { "fillColor": 255, "textColor": 0 },
+                        "alternateRowStyles": { "fillColor": [60, 69, 79], "textColor": 255 }
+                    }
+                    }
+                }'>
+            <thead>
+                <tr>
+                    <th data-field="fecha">Fecha</th>
+                    <th data-field="tipoIngreso">Tipo Ing.</th>       
+                    <th data-field="tipoComprobante">Tipo Comp.</th>
+                    <th data-field="nroComprobante">Nro Comp.</th>
+                    <th data-field="fondoOrigen">Fondo Origen</th>
+                    <th data-field="socio">Socio</th>
+                    <th data-field="proveedor">Proveedor</th>
+                    <th data-field="descripcion">Descripcion</th>
+                    <th data-field="codigoConcepto">Concepto</th>
+                    <th data-field="debe">Debe</th>
+                    <th data-field="haber">Haber</th>
+                    <th data-field="saldo">Saldo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for detalle in detalles %}
+                    <tr>
+                        <td>{{detalle.fecha|date("m/d/Y")}}</td>
+                        <td>{{detalle.tipoIngreso}}</td>
+                        <td>{{detalle.tipoComprobante.codigo}}</td>
+                        <td>{{detalle.nroComprobante}}</td>                   
+                        <td>{{detalle.fondoOrigen}}</td>
+                        <td>{{detalle.socio}}</td>
+                        <td>{{detalle.proveedor.razonSocial}}</td>
+                        <td>{{detalle.descripcion}}</td>
+                        <td>{{detalle.codigoConcepto.codigo}}</td>
+                        <td>{{detalle.debe}}</td>
+                        <td>{{detalle.haber}}</td>
+                        <td>00</td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    {{ form_start(form) }}
+                        <td>{{ form_widget(form.fecha) }}</td>
+                        <td>{{ form_widget(form.tipoIngreso) }}</td>
+                        <td>{{ form_widget(form.tipoComprobante) }}</td>
+                        <td>{{ form_widget(form.nroComprobante) }}</td>                   
+                        <td>{{ form_widget(form.fondoOrigen) }}</td>
+                        <td>{{ form_widget(form.socio) }}
+                            
+                        </td>
+                        <td>{{ form_widget(form.proveedor) }}</td>
+                        <td>{{ form_widget(form.descripcion) }}</td>
+                        <td>{{ form_widget(form.codigoConcepto) }}</td>
+                        <td>{{ form_widget(form.debe) }}</td>
+                        <td>{{ form_widget(form.haber) }}</td>
+                        <td>00</td>
+                    {{ form_end(form) }}
+                </tr>
+            </tbody>
+        </table>
+        {{dump(detalles)}}
+        {{dump(socios)}}
+
+
+               
+                
+                
+
+               
+        </div>
+    
 
     {% block javascripts %}
 
@@ -116,6 +134,7 @@
         });
     </script>
 
+  
     {% endblock javascripts %}
 
 {% endblock body %}

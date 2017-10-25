@@ -10,4 +10,8 @@ namespace gestionFondosBundle\Repository;
  */
 class CajasDetalleRepository extends \Doctrine\ORM\EntityRepository
 {
+/*	public function findAll(){
+        return $this->getEntityManager()->createQuery("SELECT det.id,det.proveedor, det.fecha,det.nroComprobante, det.socio, det.descripcion,
+        	det.debe, det.haber, det.fondoOrigen, det.tipoIngreso FROM gestionFondosBundle:cajasDetalle as det")->getResult();
+    }*/
 }
