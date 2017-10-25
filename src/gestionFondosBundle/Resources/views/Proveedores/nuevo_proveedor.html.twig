@@ -106,26 +106,6 @@
     </div>
 
     {% block javascripts %}
-
-    <script type="text/javascript">
-        $('#hd-inp-persona').on('change',function(){ 
-            console.log("sad");
-            if ($('#hd-inp-persona').val() != ""){
-                $('#gestionfondosbundle_proveedores_razonSocial').prop('disabled',true)
-                $('#gestionfondosbundle_proveedores_cuit').prop('disabled',true)
-                $('#gestionfondosbundle_proveedores_emailCorporativo').prop('disabled',true)
-                $('#gestionfondosbundle_proveedores_domicilio').prop('disabled',true)
-                $('#gestionfondosbundle_proveedores_localidad').prop('disabled',true)
-            }else{
-                $('#gestionfondosbundle_proveedores_razonSocial').prop('disabled',false)
-                $('#gestionfondosbundle_proveedores_cuit').prop('disabled',false)
-                $('#gestionfondosbundle_proveedores_emailCorporativo').prop('disabled',false)
-                $('#gestionfondosbundle_proveedores_domicilio').prop('disabled',false)
-                $('#gestionfondosbundle_proveedores_localidad').prop('disabled',false)
-            }
-        });
-    </script>
-
     <script>
         
         var personas = new Array();
@@ -135,17 +115,34 @@
             personas.push('{{persona.nombres}}'+' '+'{{persona.apellido}}');
             ids.push('{{persona.id}}');
         {% endfor %}
-        
-        $( function() {
-            $( "#hd-inp-persona" ).autocomplete({
-                source: personas
-            });
-        } );
 
-        $('#hd-inp-persona').on('change',function(){ 
-            indice = personas.indexOf($('#hd-inp-persona').val());
-            $('#gestionfondosbundle_proveedores_persona').val(ids[indice]);
-        });
+        $("#hd-inp-persona").autocomplete({
+            source: personas,
+            minLength: 0,
+            change: function(){
+                indice = personas.indexOf($('#hd-inp-persona').val());
+                $('#gestionfondosbundle_proveedores_persona').val(ids[indice]);
+    
+                if ($('#hd-inp-persona').val() != ""){
+                    $('#gestionfondosbundle_proveedores_razonSocial').prop('disabled',true)
+                    $('#gestionfondosbundle_proveedores_cuit').prop('disabled',true)
+                    $('#gestionfondosbundle_proveedores_emailCorporativo').prop('disabled',true)
+                    $('#gestionfondosbundle_proveedores_domicilio').prop('disabled',true)
+                    $('#gestionfondosbundle_proveedores_localidad').prop('disabled',true)
+                }else{
+                    $('#gestionfondosbundle_proveedores_razonSocial').prop('disabled',false)
+                    $('#gestionfondosbundle_proveedores_cuit').prop('disabled',false)
+                    $('#gestionfondosbundle_proveedores_emailCorporativo').prop('disabled',false)
+                    $('#gestionfondosbundle_proveedores_domicilio').prop('disabled',false)
+                    $('#gestionfondosbundle_proveedores_localidad').prop('disabled',false)
+                }
+            }
+        }).focus(function(){            
+           $(this).autocomplete('search', $(this).val())
+         });
+
+        
+    
     </script>
     {% endblock javascripts %}
 

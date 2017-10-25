@@ -94,7 +94,7 @@ class ProveedoresController extends Controller
                     ->add('danger', 'El proveedor no pudo ser creado!');
                 }
                 //return $this->render('gestionFondosBundle:Proveedores:index.html.twig');
-                return $this->redirectToRoute('nuevo_proveedor');
+                return $this->redirectToRoute('proveedores');
             }
          }
         return $this->render('gestionFondosBundle:Proveedores:nuevo_proveedor.html.twig',array(
